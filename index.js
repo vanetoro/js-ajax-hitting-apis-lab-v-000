@@ -19,27 +19,27 @@ function displayRepositories(){
 }
 
 
-// function getCommits(el){
-//   const repo = el.dataset.repo
-//   const req = new XMLHttpRequest()
-//   req.addEventListener("load", displayCommits);
-//   req.open('GET', 'https://api.github.com/repos/' + username +  "/" + repo + '/commits')
-//   req.send()
-// }
-//
-// function displayCommits(){
-//   var commits = JSON.parse(this.responseText)
-//   var commitsList = `<ul>${commits.map(c=> '<li>' + c.commit.committer.name +' - ' +  c.author.login +' - '+ c.commit.message + '</li>').join('')}</ul>`
-//   document.getElementById('details').innerHTML = commitsList
-// }
-//
-// function getBranches(el){
-//   const repo = el.dataset.repo
-//   const req = new XMLHttpRequest()
-//   req.addEventListener("load", displayBranches);
-//   req.open('GET', 'https://api.github.com/repos/' + username +  "/" + repo + '/branches')
-//   req.send()
-// }
+function getCommits(el){
+  const repo = el.dataset.repo
+  const req = new XMLHttpRequest()
+  req.addEventListener("load", displayCommits);
+  req.open('GET', 'https://api.github.com/repos/' + username +  "/" + repo + '/commits')
+  req.send()
+}
+
+function displayCommits(){
+  var commits = JSON.parse(this.responseText)
+  var commitsList = `<ul>${commits.map(c=> '<li>' + c.commit.committer.name +' - ' +  c.author.login +' - '+ c.commit.message + '</li>').join('')}</ul>`
+  document.getElementById('details').innerHTML = commitsList
+}
+
+function getBranches(el){
+  const repo = el.dataset.repo
+  const req = new XMLHttpRequest()
+  req.addEventListener("load", displayBranches);
+  req.open('GET', 'https://api.github.com/repos/' + username +  "/" + repo + '/branches')
+  req.send()
+}
 
 
 function displayBranches(){
