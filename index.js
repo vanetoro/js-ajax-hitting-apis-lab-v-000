@@ -44,9 +44,9 @@ function getBranches(el){
 }
 
 
-function displayBranches(){
-  const branches = JSON.parse(this.responseText)
-  const branchList = branches.map(b => b.name)
-
-  document.getElementById('details').innerHTML = branchList
-}
+// function displayBranches(){
+//   const branches = JSON.parse(this.responseText)
+//   const branchList = branches.map(b => b.name)
+// 
+//   document.getElementById('details').innerHTML = branchList
+// }
