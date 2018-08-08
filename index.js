@@ -13,7 +13,7 @@ function getRepositories(){
 function displayRepositories(){
   var repos = JSON.parse(this.responseText)
   console.log(repos)
-  
+
   const repoNames = `<ul> ${repos.map(r => '<li> <h3><a href ='+r.html_url+'>' + r.name + '</h3></a> <a href ="#" data-url="' + r.html_url +'" data-username="' + r.owner.login +'" data-repo="' + r.name + '" onclick="getCommits(this)"> Commits </a> <a href ="#" data-repo="' + r.name + '" onclick="getBranches(this)"> Branches </a></li>').join('')}</ul>`
 
   document.getElementById('repositories').innerHTML = repoNames
@@ -23,7 +23,6 @@ function displayRepositories(){
 function getCommits(el){
   const repo = el.dataset.repo
   const username = el.dataset.username
-  debugger
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits);
   req.open('GET', 'https://api.github.com/repos/' + username +  "/" + repo + '/commits')
