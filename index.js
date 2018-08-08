@@ -1,5 +1,6 @@
 function getRepositories(){
   username = document.getElementById('username').value
+  console.log(repos)
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayRepositories);
   req.open('GET', 'https://api.github.com/users/' + username + '/repos')
@@ -11,7 +12,7 @@ function getRepositories(){
 
 function displayRepositories(){
   var repos = JSON.parse(this.responseText)
-  const repoNames = `<ul> ${repos.map(r => '<li> <h3><a href ='+r.html_url+'>' + r.name + '</h3></a> <a href ="#"  data-username="' + r.name +' " data-repo="' + r.name + '" onclick="getCommits(this)"> Commits </a> <a href ="#" data-repo="' + r.name + '" onclick="getBranches(this)"> Branches </a></li>').join('')}</ul>`
+  const repoNames = `<ul> ${repos.map(r => '<li> <h3><a href ='+r.html_url+'>' + r.name + '</h3></a> <a href ="#"  data-username="' + r.owner.login +' " data-repo="' + r.name + '" onclick="getCommits(this)"> Commits </a> <a href ="#" data-repo="' + r.name + '" onclick="getBranches(this)"> Branches </a></li>').join('')}</ul>`
 
   document.getElementById('repositories').innerHTML = repoNames
 }
