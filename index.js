@@ -1,5 +1,5 @@
 function getRepositories(){
-  const username = document.getElementById('username').value
+  username = document.getElementById('username').value
 
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayRepositories);
@@ -13,19 +13,19 @@ function getRepositories(){
 function displayRepositories(){
   var repos = JSON.parse(this.responseText)
   console.log(repos)
-
-  const repoNames = `<ul> ${repos.map(r => '<li> <h3><a href ='+r.html_url+'>' + r.name + '</h3></a> <a href ="#" data-url="' + r.html_url +'" data-username="' + r.owner.login +'" data-repo="' + r.name + '" onclick="getCommits(this)"> Commits </a> <a href ="#" data-repo="' + r.name + '" onclick="getBranches(this)"> Branches </a></li>').join('')}</ul>`
+  console.log(this)
+  const repoNames = `<ul> ${repos.map(r => '<li> <h3><a href ='+r.html_url+'>' + r.name + '</h3></a> <a href ="#" data-url="' + r.html_url +'" data-username="' + r.owner.login +'" data-repository="' + r.name + '" onclick="getCommits(this)"> Commits </a> <a href ="#" data-url="' + r.html_url +'" data-username="' + r.owner.login +'" data-repository="' + r.name + '" onclick="getBranches(this)"> Branches </a> </li>').join('')}</ul>`
 
   document.getElementById('repositories').innerHTML = repoNames
 }
 
 
 function getCommits(el){
-  const repo = el.dataset.repo
+  const repo = el.dataset.repository
   const username = el.dataset.username
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits);
-  req.open('GET', 'https://api.github.com/repos/' + username +  "/" + repo + '/commits')
+  req.open('GET', `https://api.github.com/repos/${username}/${repo}/commits`)
   req.send()
 }
 
@@ -36,10 +36,10 @@ function displayCommits(){
 }
 
 function getBranches(el){
-  const repo = el.dataset.repo
-  const req = new XMLHttpRequest()
+  var repo = el.dataset.repository
+  var req = new XMLHttpRequest()
   req.addEventListener("load", displayBranches);
-  req.open('GET', 'https://api.github.com/repos/' + username +  "/" + repo + '/branches')
+  req.open('GET', `https://api.github.com/repos/${username}/${repo}/branches`)
   req.send()
 }
 
